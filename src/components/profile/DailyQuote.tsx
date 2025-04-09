@@ -1,66 +1,56 @@
 
-import { useState, useEffect } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Quote } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 
 interface DailyQuoteProps {
   className?: string;
 }
 
+// Sample quotes for mental wellness
 const quotes = [
-  {
-    text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-    author: "Nelson Mandela"
-  },
-  {
-    text: "Mental health is not a destination, but a process. It's about how you drive, not where you're going.",
-    author: "Noam Shpancer"
-  },
   {
     text: "You don't have to control your thoughts. You just have to stop letting them control you.",
     author: "Dan Millman"
   },
   {
-    text: "Self-care is not self-indulgence, it is self-preservation.",
-    author: "Audre Lorde"
-  },
-  {
-    text: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.",
+    text: "Take a deep breath. It's just a bad day, not a bad life.",
     author: "Unknown"
   },
   {
-    text: "Be patient with yourself. Self-growth is tender; it's holy ground. There's no greater investment.",
-    author: "Stephen Covey"
+    text: "Self-care is how you take your power back.",
+    author: "Lalah Delia"
   },
   {
-    text: "The most beautiful people we have known are those who have known defeat, suffering, struggle, loss, and have found their way out of the depths.",
-    author: "Elisabeth Kübler-Ross"
+    text: "You are not a drop in the ocean. You are the entire ocean in a drop.",
+    author: "Rumi"
+  },
+  {
+    text: "The greatest weapon against stress is our ability to choose one thought over another.",
+    author: "William James"
   }
 ];
 
 export function DailyQuote({ className }: DailyQuoteProps) {
-  const [quote, setQuote] = useState<{text: string, author: string} | null>(null);
+  const [quote, setQuote] = useState<typeof quotes[0]>(quotes[0]);
   
   useEffect(() => {
-    // Generate a random quote on component mount based on the day
-    const today = new Date();
-    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-    const quoteIndex = dayOfYear % quotes.length;
-    setQuote(quotes[quoteIndex]);
+    // Select a random quote from the array
+    const getRandomQuote = () => {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      return quotes[randomIndex];
+    };
+    
+    setQuote(getRandomQuote());
   }, []);
-
-  if (!quote) return null;
 
   return (
     <Card className={className}>
-      <CardContent className="p-4">
-        <div className="flex items-start gap-3">
-          <Quote className="h-5 w-5 mt-1 text-thrive-purple" />
-          <div>
-            <p className="text-sm font-medium">{quote.text}</p>
-            <p className="text-xs text-gray-500 mt-2">— {quote.author}</p>
-          </div>
-        </div>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-lg">Daily Quote</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <blockquote className="italic">"{quote.text}"</blockquote>
+        <p className="text-right mt-2 text-sm">— {quote.author}</p>
       </CardContent>
     </Card>
   );

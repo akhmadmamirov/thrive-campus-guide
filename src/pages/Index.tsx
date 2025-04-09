@@ -1,13 +1,13 @@
 
 import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, ResponsiveContainer } from "recharts";
-import { Calendar, Home } from "lucide-react";
+import { Calendar, Home, Yoga, BookOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserAvatar } from "@/components/ui/user-avatar";
 import { useAuth } from "@/contexts/auth-context";
 import { BottomNav } from "@/components/navigation/BottomNav";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Mock mood data
 const moodData = [
@@ -20,17 +20,23 @@ const moodData = [
   { day: 'Aug 7', value: 73 },
 ];
 
-// Mock self care suggestions
+// Self care suggestions with proper links
 const selfCareItems = [
   {
     id: 1,
     title: "Yoga for stress relief",
-    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843"
+    description: "15 minute guided session",
+    icon: Yoga,
+    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843",
+    link: "/discover?activity=yoga"
   },
   {
     id: 2,
     title: "Reading list",
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+    description: "Recommended wellness books",
+    icon: BookOpen,
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    link: "/discover?activity=reading"
   }
 ];
 
@@ -131,16 +137,26 @@ export default function DashboardPage() {
           <h3 className="text-lg font-medium mb-4">Self care tips</h3>
           <div className="grid grid-cols-2 gap-4">
             {selfCareItems.map(item => (
-              <div key={item.id} className="card-hover rounded-lg overflow-hidden">
-                <div className="relative h-40">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover"
-                  />
+              <Link to={item.link} key={item.id} className="block">
+                <div className="card-hover rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+                  <div className="relative h-40">
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-3">
+                      <div className="text-white">
+                        <div className="flex items-center gap-2">
+                          <item.icon className="h-5 w-5" />
+                          <p className="font-medium">{item.title}</p>
+                        </div>
+                        <p className="text-sm text-white/80">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="font-medium mt-2">{item.title}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
