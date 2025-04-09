@@ -7,6 +7,7 @@ type User = {
   email: string;
   avatar?: string;
   location?: string;
+  interests?: string[];
 };
 
 interface AuthContextType {
@@ -38,10 +39,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // For now, we'll simulate a successful login with a mock user
     const mockUser = {
       id: "user-123",
-      name: "Mo Jordan",
+      name: "Akhmad Mamirov",
       email: email,
-      avatar: "/lovable-uploads/fb117cac-9aff-4f6c-9622-06e458dbff5e.png",
-      location: "NEW YORK, NY"
+      avatar: "/lovable-uploads/5cc1789e-4978-46a1-b53d-5d67b8b668ea.png",
+      location: "SAN FRANCISCO, CA",
+      interests: ["Yoga for stress relief", "Reading"]
     };
     
     // Simulate API request delay
@@ -58,10 +60,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // For now, we'll simulate a successful registration with a mock user
     const mockUser = {
       id: "user-" + Math.floor(Math.random() * 1000),
-      name: name,
+      name: name || "Akhmad Mamirov",
       email: email,
-      avatar: "/lovable-uploads/fb117cac-9aff-4f6c-9622-06e458dbff5e.png",
-      location: "NEW YORK, NY"
+      avatar: "/lovable-uploads/5cc1789e-4978-46a1-b53d-5d67b8b668ea.png",
+      location: "SAN FRANCISCO, CA",
+      interests: ["Yoga for stress relief", "Reading"]
     };
     
     // Simulate API request delay
