@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, ResponsiveContainer } from "recharts";
-import { Calendar, Home, Yoga, BookOpen } from "lucide-react";
+import { Calendar, Home, Dumbbell, BookOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserAvatar } from "@/components/ui/user-avatar";
 import { useAuth } from "@/contexts/auth-context";
@@ -26,7 +26,7 @@ const selfCareItems = [
     id: 1,
     title: "Yoga for stress relief",
     description: "15 minute guided session",
-    icon: Yoga,
+    icon: Dumbbell,
     image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843",
     link: "/discover?activity=yoga"
   },
